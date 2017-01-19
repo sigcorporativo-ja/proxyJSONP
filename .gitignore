@@ -1,0 +1,6 @@
+# Directorios y ficheros ignorados por git
+*.settings
+*.project
+*.classpath
+target
+build
