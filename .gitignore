@@ -2,5 +2,7 @@
 *.settings
 *.project
 *.classpath
+*.directory
+WebContent
 target
 build
