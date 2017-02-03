@@ -30,5 +30,5 @@ http://[CONTEXTO_DESPLIEGUE]/proxyJSONP?url=[url_servicio_securizado]&tojson=[tr
 ```
 Configuración en Mapea4JS:
 ```javascript
-M.config('PROXY_URL', 'http://[CONTEXTO_DESPLIEGUE]/proxyJSONP=<%=ticketStr%>');
+M.config('PROXY_URL', 'http://[CONTEXTO_DESPLIEGUE]/proxyJSONP?ticket=<%=ticketStr%>');
 ```
