@@ -16,8 +16,8 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.io.IOUtils;
 
-import es.guadaltel.framework.ticket.Ticket;
-import es.guadaltel.framework.ticket.TicketFactory;
+import es.juntadeandalucia.framework.ticket.Ticket;
+import es.juntadeandalucia.framework.ticket.TicketFactory;
 import es.juntadeandalucia.mapea.bean.ProxyResponse;
 import es.juntadeandalucia.mapea.builder.JSBuilder;
 
