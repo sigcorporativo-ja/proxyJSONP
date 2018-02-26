@@ -10,21 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.io.IOUtils;
 
-import es.juntadeandalucia.framework.ticket.Ticket;
-import es.juntadeandalucia.framework.ticket.TicketFactory;
+import es.guadaltel.framework.ticket.Ticket;
+import es.guadaltel.framework.ticket.TicketFactory;
 import es.juntadeandalucia.mapea.bean.ProxyResponse;
 import es.juntadeandalucia.mapea.builder.JSBuilder;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Servlet implementation class JSONPProxy
  */
-@WebServlet("/proxyJSONP")
+@WebServlet("/JSONPProxy")
 public class JSONPProxy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String AUTHORIZATION = "Authorization";
@@ -34,6 +38,7 @@ public class JSONPProxy extends HttpServlet {
 	 */
 	public JSONPProxy() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -88,9 +93,15 @@ public class JSONPProxy extends HttpServlet {
 			int statusCode = httpget.getStatusCode();
 			proxyResponse.setStatusCode(statusCode);
 			if (statusCode == HttpStatus.SC_OK) {
+				
+				String encoding = this.getResponseEncoding(httpget);
+				if (encoding == null) {
+					encoding = "UTF-8";
+				}
+				
 				InputStream responseStream = httpget.getResponseBodyAsStream();
 				String responseContent = IOUtils.toString(responseStream,
-						"UTF-8");
+						encoding);
 
 				proxyResponse.setContent(responseContent);
 			}
@@ -131,6 +142,27 @@ public class JSONPProxy extends HttpServlet {
 		proxyResponse.setError(true);
 		proxyResponse.setErrorMessage(message);
 		return proxyResponse;
+	}
+
+	/**
+	 * Gets the encoding of a response
+	 */
+	private String getResponseEncoding(GetMethod httpget) {
+		String regexp = ".*charset\\=([^;]+).*";
+		Boolean isCharset = null;
+		String encoding = null;
+		Header[] headerResponse = httpget.getResponseHeaders("Content-Type");
+		for (Header header : headerResponse) {
+			String contentType = header.getValue();
+			if (!contentType.isEmpty()) {
+				isCharset = Pattern.matches(regexp, contentType);
+				if (isCharset) {
+					encoding = contentType.replaceAll(regexp, "$1");
+					break;
+				}
+			}
+		}
+		return encoding;
 	}
 
 }
