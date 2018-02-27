@@ -17,3 +17,7 @@ Una vez desplegado, para hacer uso del proxy únicamente es necesario realizar u
 ```
 http://[CONTEXTO_DESPLIEGUE]/proxy?url=[url_datos_origen]&tojson=[true|false]&callback=[funcion_de_calback]
 ```
+Para usar una instancia de este proxy desde un código Mapea4 javacript, usar la siguiente instrucción:
+```javascript
+M.config('PROXY_URL', 'http://[CONTEXTO_DESPLIEGUE]/proxy');
+```
