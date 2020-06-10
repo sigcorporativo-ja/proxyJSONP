@@ -1,4 +1,4 @@
-# ProxyJSONP v2.0.0
+# ProxyJSONP v2.1.0
 ProxyJSONP es una distribución independiende del proxyJSONP que contiene Mapea4, para facilitar su despligue en entornos que lo requieran.
 > :bulb: <a> Puedes consultar la [documentación de Mapea](https://github.com/sigcorporativo-ja/Mapea4/wiki/Proxys) sobre el uso de proxys </a>
 
